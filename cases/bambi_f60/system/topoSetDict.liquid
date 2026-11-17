@@ -1,0 +1,5 @@
+FoamFile { version 2.0; format ascii; class dictionary; object topoSetDict; }
+actions ( { name liquid; type cellSet; action new; source fieldToCell; field alpha.water; min 1e-4; max 2; }
+  { name grow; type pointSet; action new; source cellToPoint; sets (liquid); option all; }
+  { name liquid; type cellSet; action add; source pointToCell; sets (grow); option any; } { name grow; type pointSet; action new; source cellToPoint; sets (liquid); option all; }
+  { name liquid; type cellSet; action add; source pointToCell; sets (grow); option any; } );

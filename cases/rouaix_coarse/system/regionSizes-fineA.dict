@@ -1,0 +1,17 @@
+FoamFile { version 2.0; format ascii; class dictionary; object regionSizes; }
+// Connected-liquid statistics of a Rouaix field (VOF -> drop handover, thesis Ch. 4): regions of
+// alpha.water above the threshold, the core attached to the nozzle reported separately; per-bin
+// average velocity. Two thresholds: interface (0.5) and the paper's cloud surface (0.1).
+functions
+{
+    regionSizes05
+    {
+        type regionSizeDistribution; libs (fieldFunctionObjects); log true;
+        field alpha.water; patches (nozzle); fields (U); threshold 0.5;
+        maxDiameter 1.0; minDiameter 0; nBins 200; setFormat raw;
+    }
+    regionSizes01
+    {
+        $regionSizes05; threshold 0.1;
+    }
+}

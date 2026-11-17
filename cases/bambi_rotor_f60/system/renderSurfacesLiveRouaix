@@ -1,0 +1,16 @@
+// Live render output for Rouaix videos: liquid iso-surfaces (chi = 0.5 and 0.1) and the spanwise
+// centre plane with alpha/U, every 10 ms (include inside controlDict functions).
+renderSurfaces
+{
+    type surfaces; libs (sampling); surfaceFormat vtk;
+    formatOptions { vtk { format binary; } }
+    writeControl adjustableRunTime; writeInterval 0.01;
+    interpolationScheme cellPoint; fields (alpha.water U);
+    surfaces
+    {
+        jet50 { type isoSurface; isoField alpha.water; isoValue 0.5; interpolate true; }
+        jet10 { type isoSurface; isoField alpha.water; isoValue 0.1; interpolate true; }
+        centre { type cuttingPlane; planeType pointAndNormal; pointAndNormalDict { point (0 0 0); normal (0 0 1); }
+                 interpolate false; bounds (-3.456 -32.256 -0.1) (44.928 0.1 0.1); }
+    }
+}

@@ -1,0 +1,22 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object fvOptions;
+}
+
+// prescribed mean thrust (not a blade-element rotor), on air above the bucket; NOT alpha-gated:
+// the rotorDisk diagnostic must show alpha.water = 0 in the zone
+rotorMomentum
+{
+    type vectorSemiImplicitSource;
+    active true;
+    selectionMode cellZone;
+    cellZone rotorDiskCells;
+    volumeMode absolute;
+    sources
+    {
+        U { explicit table ((0 (0 0 0)) (0.5 (0 -97894.305293 0)) (1000000 (0 -97894.305293 0))); implicit 0; }
+    }
+}

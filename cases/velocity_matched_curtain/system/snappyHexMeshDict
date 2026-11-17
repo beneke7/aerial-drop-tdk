@@ -1,0 +1,60 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object snappyHexMeshDict;
+}
+
+castellatedMesh true;
+snap false;
+addLayers false;
+geometry
+{
+    coarse
+    { type searchableBox; min (-3.213 -30 -8.213); max (44 0 8.213); }
+    wake
+    { type searchableBox; min (-2.213 -12.013 -6.013); max (36.013 0 6.013); }
+    medium
+    { type searchableBox; min (-1.213 -7.513 -1.717); max (29.513 0 1.717); }
+    near
+    { type searchableBox; min (-0.913 -1.613 -1.017); max (8.013 0 1.017); }
+    mouths
+    { type searchableBox; min (-0.713 -0.153 -0.717); max (0.713 0 0.717); }
+}
+castellatedMeshControls
+{
+    maxLocalCells 1000000;
+    maxGlobalCells 12896791;
+    minRefinementCells 0;
+    maxLoadUnbalance 0.10;
+    nCellsBetweenLevels 3;
+    features ();
+    refinementSurfaces {};
+    resolveFeatureAngle 30;
+    refinementRegions
+    {
+        coarse { mode inside; levels ((1e15 1)); }
+        wake { mode inside; levels ((1e15 2)); }
+        medium { mode inside; levels ((1e15 3)); }
+        near { mode inside; levels ((1e15 4)); }
+        mouths { mode inside; levels ((1e15 5)); }
+    }
+    locationInMesh (0.0371 -1.0373 0.0371);
+    allowFreeStandingZoneFaces true;
+}
+snapControls { nSmoothPatch 3; tolerance 2; nSolveIter 30; nRelaxIter 5; }
+addLayersControls { relativeSizes true; layers {}; expansionRatio 1.1; finalLayerThickness 0.5;
+    minThickness 0.1; nGrow 0; featureAngle 60; nRelaxIter 3; nSmoothSurfaceNormals 1;
+    nSmoothNormals 3; nSmoothThickness 10; maxFaceThicknessRatio 0.5;
+    maxThicknessToMedialRatio 0.3; minMedialAxisAngle 90; nBufferCellsNoExtrude 0; nLayerIter 50; }
+meshQualityControls
+{
+    maxNonOrtho 65; maxBoundarySkewness 20; maxInternalSkewness 4; maxConcave 80;
+    minVol 1e-13; minTetQuality 1e-15; minArea -1; minTwist 0.02;
+    minDeterminant 0.001; minFaceWeight 0.05; minVolRatio 0.01;
+    minTriangleTwist -1; nSmoothScale 4; errorReduction 0.75;
+}
+debug 0;
+writeFlags (scalarLevels);
+mergeTolerance 1e-6;

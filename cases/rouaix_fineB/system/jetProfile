@@ -1,0 +1,67 @@
+// Rouaix Case 1 jet profile, one appended line per sample (single file; replaces the
+// per-timestep raw plane output). For each x-station (+/- halfBin, cell centres) and alpha
+// threshold: deepest y, min z, max z of cells with alpha >= threshold, reduced over all ranks.
+// Output: postProcessing/jetProfile.dat with columns
+//   time  then for each station s and threshold k: ymin zmin zmax   (metres; NaN if none)
+jetProfile
+{
+    type            coded;
+    libs            (utilityFunctionObjects);
+    name            jetProfile;
+    executeControl  adjustableRunTime;
+    executeInterval 0.005;
+    writeControl    adjustableRunTime;
+    writeInterval   0.005;
+
+    codeInclude
+    #{
+        #include <fstream>
+        #include <iomanip>
+    #};
+
+    codeWrite
+    #{
+        const volScalarField& alpha = mesh().lookupObject<volScalarField>("alpha.water");
+        const vectorField& C = mesh().C().primitiveField();
+        const scalarField& a = alpha.primitiveField();
+        const scalar xs[] = {0.1, 0.2, 0.4, 0.6, 0.8, 1.2, 1.6, 2.0, 2.4, 3.2};
+        const scalar thr[] = {0.1, 0.5, 0.9};
+        const label nS = 10, nK = 3;
+        const scalar halfBin = 0.03;
+        List<scalar> ymin(nS*nK, GREAT), zmin(nS*nK, GREAT), zmax(nS*nK, -GREAT);
+        forAll(C, i)
+        {
+            if (a[i] < thr[0]) continue;
+            for (label s = 0; s < nS; ++s)
+            {
+                if (mag(C[i].x() - xs[s]) > halfBin) continue;
+                for (label k = 0; k < nK && a[i] >= thr[k]; ++k)
+                {
+                    const label j = s*nK + k;
+                    ymin[j] = min(ymin[j], C[i].y());
+                    zmin[j] = min(zmin[j], C[i].z());
+                    zmax[j] = max(zmax[j], C[i].z());
+                }
+            }
+        }
+        forAll(ymin, j)
+        {
+            reduce(ymin[j], minOp<scalar>());
+            reduce(zmin[j], minOp<scalar>());
+            reduce(zmax[j], maxOp<scalar>());
+        }
+        if (Pstream::master())
+        {
+            const fileName dir(mesh().time().globalPath()/"postProcessing");
+            mkDir(dir);
+            std::ofstream os((dir/"jetProfile.dat").c_str(), std::ios::app);
+            os << std::setprecision(8) << mesh().time().value();
+            forAll(ymin, j)
+            {
+                if (ymin[j] > 0.5*GREAT) os << " nan nan nan";
+                else os << ' ' << ymin[j] << ' ' << zmin[j] << ' ' << zmax[j];
+            }
+            os << '\n';
+        }
+    #};
+}

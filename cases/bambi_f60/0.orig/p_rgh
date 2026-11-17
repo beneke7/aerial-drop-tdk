@@ -1,0 +1,55 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class volScalarField;
+ object p_rgh;
+}
+
+dimensions [1 -1 -2 0 0 0 0];
+internalField uniform 0;
+boundaryField
+{
+    gasInlet
+    {
+        type fixedFluxPressure;
+        gradient uniform 0;
+        value uniform 0;
+    }
+    downstreamOutlet
+    {
+        type freestreamPressure;
+        freestreamValue uniform 0;
+        value uniform 0;
+    }
+    bottomOutlet
+    {
+        type freestreamPressure;
+        freestreamValue uniform 0;
+        value uniform 0;
+    }
+    spanwiseMinus
+    {
+        type freestreamPressure;
+        freestreamValue uniform 0;
+        value uniform 0;
+    }
+    spanwisePlus
+    {
+        type freestreamPressure;
+        freestreamValue uniform 0;
+        value uniform 0;
+    }
+    aircraftWall
+    {
+        type fixedFluxPressure;
+        gradient uniform 0;
+        value uniform 0;
+    }
+    nozzle
+    {
+        type fixedFluxPressure;
+        gradient uniform 0;
+        value uniform 0;
+    }
+}

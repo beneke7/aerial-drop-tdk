@@ -1,0 +1,58 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class volScalarField;
+ object epsilon;
+}
+
+dimensions [0 2 -3 0 0 0 0];
+internalField uniform 0.085628672;
+boundaryField
+{
+    gasInlet
+    {
+        type fixedValue;
+        value uniform 0.085628672;
+    }
+    downstreamOutlet
+    {
+        type inletOutlet;
+        inletValue uniform 0.085628672;
+        value uniform 0.085628672;
+    }
+    bottomOutlet
+    {
+        type inletOutlet;
+        inletValue uniform 0.085628672;
+        value uniform 0.085628672;
+    }
+    spanwiseMinus
+    {
+        type inletOutlet;
+        inletValue uniform 0.085628672;
+        value uniform 0.085628672;
+    }
+    spanwisePlus
+    {
+        type inletOutlet;
+        inletValue uniform 0.085628672;
+        value uniform 0.085628672;
+    }
+    top
+    {
+        type inletOutlet;
+        inletValue uniform 0.085628672;
+        value uniform 0.085628672;
+    }
+    bucket
+    {
+        type epsilonWallFunction;
+        value uniform 0.085628672;
+    }
+    nozzle
+    {
+        type fixedValue;
+        value uniform 0.000174809925;
+    }
+}

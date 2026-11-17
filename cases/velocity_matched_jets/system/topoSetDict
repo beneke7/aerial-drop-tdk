@@ -1,0 +1,13 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object topoSetDict;
+}
+
+actions
+(
+    { name nozzleFaces; type faceSet; action new; source patchToFace; patch aircraftWall; }
+    { name nozzleFaces; type faceSet; action subset; source boxToFace; boxes ((-0.414000 -0.1 -0.864000) (0.414000 0.1 -0.756000) (-0.414000 -0.1 -0.324000) (0.414000 0.1 -0.216000) (-0.414000 -0.1 0.216000) (0.414000 0.1 0.324000) (-0.414000 -0.1 0.756000) (0.414000 0.1 0.864000)); }
+);

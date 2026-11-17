@@ -1,0 +1,15 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aerial-drop-tdk"
+version = "0.1.0"
+description = "Companion code to the TDK thesis on the physical modelling of aerial firefighting"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.1,<3", "scipy>=1.13,<2", "matplotlib>=3.8", "pyvista>=0.49,<0.50"]
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/aerial_drop"]

@@ -1,0 +1,93 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2512                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+
+solvers
+{
+    pcorr { solver PCG; preconditioner DIC; tolerance 1e-10; relTol 0; }
+    pcorrFinal { $pcorr; relTol 0; }
+
+    p_rgh { solver PCG; preconditioner { preconditioner GAMG; smoother DICGaussSeidel; tolerance 1e-5; relTol 0; } tolerance 1e-8; relTol 0.01; maxIter 1000; }
+    p_rghFinal { $p_rgh; relTol 0; }
+    U
+    {
+        solver PBiCGStab;
+        preconditioner DILU;
+        tolerance 1e-8;
+        relTol 0.1;
+        maxIter 100;
+    }
+    "(k|epsilon)"
+    {
+        solver smoothSolver;
+        smoother GaussSeidel;
+        tolerance 1e-8;
+        relTol 0.1;
+        nSweeps 2;
+        maxIter 100;
+    }
+    UFinal
+    {
+        solver PBiCGStab;
+        preconditioner DILU;
+        tolerance 1e-8;
+        relTol 0;
+        maxIter 100;
+    }
+    "(k|epsilon)Final"
+    {
+        solver smoothSolver;
+        smoother GaussSeidel;
+        tolerance 1e-8;
+        relTol 0;
+        nSweeps 2;
+        maxIter 100;
+    }
+    "alpha.water.*"
+    {
+        nAlphaCorr 2;
+        nAlphaSubCycles 3;
+        cAlpha 1;
+        MULESCorr yes;
+        nLimiterIter 5;
+        solver smoothSolver;
+        smoother symGaussSeidel;
+        tolerance 1e-8;
+        relTol 0;
+    }
+
+    kFinal
+    {
+        solver smoothSolver;
+        smoother GaussSeidel;
+        tolerance 1e-8;
+        relTol 0;
+        nSweeps 2;
+        maxIter 100;
+        minIter 1;
+    }
+}
+PIMPLE
+{
+    momentumPredictor yes;
+    nOuterCorrectors 3;
+    nCorrectors 2;
+    nNonOrthogonalCorrectors 1;
+    turbOnFinalIterOnly yes;
+}
+relaxationFactors
+{
+    fields { p_rgh 0.7; p_rghFinal 1; }
+    equations { "(U|k|epsilon)" 0.8; "(U|k|epsilon)Final" 1; }
+}

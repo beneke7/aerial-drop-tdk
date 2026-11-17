@@ -1,0 +1,26 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object blockMeshDict;
+}
+
+convertToMeters 1;
+vertices
+(
+    (-3.456 -32.256 -14.4) (44.928 -32.256 -14.4) (44.928 0 -14.4) (-3.456 0 -14.4)
+    (-3.456 -32.256 14.4) (44.928 -32.256 14.4) (44.928 0 14.4) (-3.456 0 14.4)
+);
+blocks ( hex (0 1 2 3 4 5 6 7) (84 56 50) simpleGrading (1 1 1) );
+edges ();
+boundary
+(
+    gasInlet { type patch; faces ((0 4 7 3)); }
+    downstreamOutlet { type patch; faces ((1 2 6 5)); }
+    aircraftWall { type wall; faces ((3 7 6 2)); }
+    bottomOutlet { type patch; faces ((0 1 5 4)); }
+    spanwiseMinus { type patch; faces ((0 3 2 1)); }
+    spanwisePlus { type patch; faces ((4 5 6 7)); }
+);
+mergePatchPairs ();

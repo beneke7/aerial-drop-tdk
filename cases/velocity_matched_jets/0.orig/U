@@ -1,0 +1,51 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class volVectorField;
+ object U;
+}
+
+dimensions [0 1 -1 0 0 0 0];
+internalField uniform (21.606648 0 0);
+boundaryField
+{
+    gasInlet
+    {
+        type fixedValue;
+        value uniform (21.606648 0 0);
+    }
+    downstreamOutlet
+    {
+        type freestreamVelocity;
+        freestreamValue uniform (21.606648 0 0);
+        value uniform (21.606648 0 0);
+    }
+    bottomOutlet
+    {
+        type freestreamVelocity;
+        freestreamValue uniform (21.606648 0 0);
+        value uniform (21.606648 0 0);
+    }
+    spanwiseMinus
+    {
+        type freestreamVelocity;
+        freestreamValue uniform (21.606648 0 0);
+        value uniform (21.606648 0 0);
+    }
+    spanwisePlus
+    {
+        type freestreamVelocity;
+        freestreamValue uniform (21.606648 0 0);
+        value uniform (21.606648 0 0);
+    }
+    aircraftWall
+    {
+        type noSlip;
+    }
+    nozzle
+    {
+        type uniformFixedValue;
+        uniformValue table ((0 (21.606648 0 0)) (0.1 (21.606648 -2.05429948 0)) (3.4 (21.606648 -2.05429948 0)) (3.5 (21.606648 0 0)) (6 (21.606648 0 0)));
+    }
+}

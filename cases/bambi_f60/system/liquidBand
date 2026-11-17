@@ -1,0 +1,30 @@
+liquidBand
+{
+    type            vtkWrite;
+    libs            (utilityFunctionObjects);
+    writeControl    adjustableRunTime;
+    writeInterval   0.1;
+    boundary        false;
+    fields          (alpha.water U);
+    selection
+    {
+        bandX  { action use; source box; box (5 -32.3 -14.5) (9 0.1 14.5); }
+        bandY  { action add; source box; box (-3.5 -14 -14.5) (5 -10 14.5); }
+    }
+}
+// exact liquid flux out of B through the face zone of its boundary (topoSetDict.S), every step:
+// calibrates the band estimator (v2b recovered 64 %)
+SFlux
+{
+    type            surfaceFieldValue;
+    libs            (fieldFunctionObjects);
+    regionType      faceZone;
+    name            SZone;
+    operation       sum;
+    fields          (phi alphaPhi_);
+    writeFields     false;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    timeStep;
+    writeInterval   1;
+}

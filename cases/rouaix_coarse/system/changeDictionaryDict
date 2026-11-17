@@ -1,0 +1,50 @@
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    object changeDictionaryDict;
+}
+
+p_rgh
+{
+    boundaryField
+    {
+        downstreamOutlet
+        {
+            type prghTotalPressure;
+            p0 uniform 0;
+            rho rho;
+            U U;
+            phi phi;
+            value uniform 0;
+        }
+        bottomOutlet
+        {
+            type prghTotalPressure;
+            p0 uniform 0;
+            rho rho;
+            U U;
+            phi phi;
+            value uniform 0;
+        }
+        spanwiseMinus
+        {
+            type prghTotalPressure;
+            p0 uniform 0;
+            rho rho;
+            U U;
+            phi phi;
+            value uniform 0;
+        }
+        spanwisePlus
+        {
+            type prghTotalPressure;
+            p0 uniform 0;
+            rho rho;
+            U U;
+            phi phi;
+            value uniform 0;
+        }
+    }
+}
