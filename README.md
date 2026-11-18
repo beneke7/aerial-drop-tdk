@@ -13,6 +13,7 @@ Companion code to the TDK thesis *A légi tűzoltás fizikai modellezése és ha
 | `scripts/evaporation.py` | Single-drop evaporation (Denner 2026) |
 | `scripts/band_interp.py`, `metric_measured_cases.py` | Reconstruction of measured cup patterns from published contours and their evaluation |
 | `src/aerial_drop/hold.py` | Evaluation of ground patterns: discrete and continuous efficiency |
+| `supplement_appendices_A-C.md` | Longer working version of thesis Appendices A–C (Hungarian), with the tables shortened or dropped in the submitted thesis |
 
 Each case has the standard `0.orig/`, `constant/` and `system/` folders; meshes, fields and logs are not included. The settings are summarised in Appendix C of the thesis.
 
@@ -23,7 +24,7 @@ pip install -e .
 python scripts/handover_crossing.py <liquidBand.vtm.series> --U 21.607 ...
 ```
 
-The scripts read OpenFOAM exports and digitised measurements that are not part of this repository (size).
+The thesis results use the TAB-distortion drag law (`--drag tab` in `handover_drops.py`; O'Rourke & Amsden 1987). The scripts read OpenFOAM exports and digitised measurements that are not part of this repository (size).
 
 ## Not published
 
