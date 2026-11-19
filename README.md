@@ -13,7 +13,7 @@ Companion code to the TDK thesis *A légi tűzoltás fizikai modellezése és ha
 | `scripts/evaporation.py` | Single-drop evaporation (Denner 2026) |
 | `scripts/band_interp.py`, `metric_measured_cases.py` | Reconstruction of measured cup patterns from published contours and their evaluation |
 | `src/aerial_drop/hold.py` | Evaluation of ground patterns: discrete and continuous efficiency |
-| `supplement_appendices_A-C.md` | Longer working version of thesis Appendices A–C (Hungarian), with the tables shortened or dropped in the submitted thesis |
+| `online_melleklet.pdf` | Online supplement of the thesis (Hungarian): evaluation details (A), model details (B), simulation data, settings and extra figures (C), with the reference list |
 
 Each case has the standard `0.orig/`, `constant/` and `system/` folders; meshes, fields and logs are not included. The settings are summarised in Appendix C of the thesis.
 
