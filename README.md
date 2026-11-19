@@ -1,6 +1,6 @@
 # aerial-drop-tdk
 
-Companion code to the TDK thesis *A légi tűzoltás fizikai modellezése és hatékonyságának vizsgálata* (ELTE TTK, 2026).
+Companion code to the TDK thesis *A légi tűzoltás fizikai modellezése és hatékonyságának vizsgálata* (Bencz Benedek, ELTE TTK, 2026; supervisor: Prof. Dr. Restás Ágoston). The submitted thesis is `tdk_thesis_hu.pdf`.
 
 ## Contents
 
@@ -13,9 +13,10 @@ Companion code to the TDK thesis *A légi tűzoltás fizikai modellezése és ha
 | `scripts/evaporation.py` | Single-drop evaporation (Denner 2026) |
 | `scripts/band_interp.py`, `metric_measured_cases.py` | Reconstruction of measured cup patterns from published contours and their evaluation |
 | `src/aerial_drop/hold.py` | Evaluation of ground patterns: discrete and continuous efficiency |
-| `online_melleklet.pdf` | Online supplement of the thesis (Hungarian): evaluation details (A), model details (B), simulation data, settings and extra figures (C), with the reference list |
+| `tdk_thesis_hu.pdf` | The thesis as submitted (Hungarian, 19 Nov 2026) |
+| `online_melleklet.pdf` | Extended appendices from the longer working version (Hungarian): evaluation details, model details, simulation data, settings and extra figures, with the full reference list. Its A–C lettering predates the submitted thesis. |
 
-Each case has the standard `0.orig/`, `constant/` and `system/` folders; meshes, fields and logs are not included. The settings are summarised in Appendix C of the thesis.
+Each case has the standard `0.orig/`, `constant/` and `system/` folders; meshes, fields and logs are not included. The settings are summarised in Appendix A of the thesis.
 
 ## Use
 
